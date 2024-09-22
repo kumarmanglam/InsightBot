@@ -1,0 +1,77 @@
+/* General Table Styling */
+.table {
+    width: 100%;
+    border-collapse: separate;
+    /* Combines borders for a cleaner look */
+    border-radius: 20px;
+    /* Apply border radius to the whole table */
+    overflow: hidden;
+    /* Ensures border-radius takes effect */
+    border: 1px solid #e0e0e0;
+    /* Lighten the border for a softer look */
+    font-family: Arial, sans-serif;
+    /* Consistent font for better readability */
+    text-align: left;
+    /* Align text to the left for readability */
+}
+
+/* Header Styling */
+.table-head {
+    background-color: #f8f8f8;
+    /* Slightly lighter background for better contrast */
+    color: #333;
+    /* Darker font color for better readability */
+    font-weight: bold;
+}
+
+.table-head-data {
+    background-color: inherit;
+    /* Keeps header styling consistent */
+    padding: 15px;
+}
+
+/* Row and Cell Styling */
+.table-row td,
+.table-row th {
+    padding: 15px;
+    border: 2px solid #f2f2f2;
+}
+
+.table tr {
+    transition: background-color 0.3s ease;
+}
+
+.table tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table th:first-child {
+    border-top-left-radius: 20px;
+}
+
+.table th:last-child {
+    border-top-right-radius: 20px;
+}
+
+.table tr:last-child td:first-child {
+    border-bottom-left-radius: 20px;
+}
+
+.table tr:last-child td:last-child {
+    border-bottom-right-radius: 20px;
+}
+
+@media (max-width: 768px) {
+    .table {
+        font-size: 14px;
+    }
+
+    .table-row td,
+    .table-row th {
+        padding: 10px;
+    }
+}

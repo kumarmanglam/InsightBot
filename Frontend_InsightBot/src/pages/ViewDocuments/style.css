@@ -1,0 +1,12 @@
+.view-license-container {
+    padding: 50px 150px;
+}
+
+.upload-button {
+    padding: 10px 25px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    margin-bottom: 20px;
+}
