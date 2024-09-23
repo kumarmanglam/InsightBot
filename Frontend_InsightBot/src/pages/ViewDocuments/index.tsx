@@ -1,17 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Table from '../../components/common/Table'
 import { TABLE_HEADER_CONFIG_VIEW_DOCUMENTS } from '../../config/tableConfig'
 import "./style.css"
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { setChatHistory } from '../../store/Reducers/chatSlice'
 
-const books = [
-    {
-        book_id: "sdds",
-        book_name: "Book 1",
-    }
-]
+
 
 const ViewDocuments = () => {
+    const dispatch = useDispatch();
+    const [books, setBooks] = useState([]);
+
+    const getDocuments = async () => {
+        const data = await axios.get("http://localhost:3000/documents/getAllDocs");
+        console.log(data.data);
+        setBooks(data.data);
+    }
+
+    useEffect(() => {
+        getDocuments();
+        dispatch(setChatHistory([]))
+    }, [])
+
     const navigate = useNavigate();
     const handleSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();

@@ -11,21 +11,22 @@ const fakeAPI = (): Promise<string> => {
     });
 };
 
-export const callConversationAPI = async (prompt: string, chatHistory: ChatEntry[]): Promise<any> => {
-    // return { "response": "api working" };
-    const url = 'http://172.16.21.248:3000/conversation/';
+export const callConversationAPI = async (pdfId: string | undefined, query: string): Promise<any> => {
+    const url = 'http://localhost:3000/conversations/conversation';
 
-    const formData = new URLSearchParams();
-    formData.append('prompt', prompt);
-    formData.append('data', JSON.stringify(chatHistory))
+    const requestData = {
+        userId: "66ee8271f2e8c6679c7cdeda",
+        pdfId,
+        userRole: "user",
+        query,
+    };
     try {
-        const response = await axios.post(url, formData, {
+        const response = await axios.post(url, requestData, {
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/json',
             },
         });
-        // console.log(response.data)
-        return response.data;
+        return response;
     } catch (error) {
         console.error('Error hitting the API:', error);
         throw error;

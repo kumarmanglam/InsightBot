@@ -31,12 +31,17 @@ const Table: React.FC<prop> = ({ headerConfig, data }) => {
                                     const cellData = item[val["key"]];
                                     if (val["key"] == 'delete') {
                                         return <td key={i} className={`${item.classes} table-data`}>
-                                            <DeleteButton />
+                                            <DeleteButton book={item} />
                                         </td>
                                     }
                                     if (val["key"] == 'action') {
                                         return <td key={i} className={`${item.classes} table-data`}>
-                                            <OpenChatboxButton />
+                                            <OpenChatboxButton book={item} />
+                                        </td>
+                                    }
+                                    if (val["key"] == 'index') {
+                                        return <td key={i} className={`${item.classes} table-data`}>
+                                            {index + 1}
                                         </td>
                                     }
                                     return (

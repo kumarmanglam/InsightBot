@@ -91,7 +91,7 @@ async function saveDataToMongo(data, collection) {
             }
             console.log(`Inserted document for chunk from ${item.source}`);
             // Delay between API calls to avoid rate limiting
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            // await new Promise(resolve => setTimeout(resolve, 1000));
         } catch (error) {
             console.error(`Failed to process chunk from ${item.source}: ${error.message}`);
         }

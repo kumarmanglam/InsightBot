@@ -7,7 +7,9 @@ import axios from 'axios';
 
 const UploadDocuments = () => {
     const [file, setFile] = useState<File | null>(null);
-    const [isValidType, setIsValidType] = useState<Boolean>(true);
+    const [isValidType, setIsValidType] = useState<boolean>(true);
+    const [isDisabled, setIsDisabled] = useState<boolean>(true);
+    const [isUploading, setIsUploading] = useState<boolean>(false);
     const navigate = useNavigate();
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,6 +18,7 @@ const UploadDocuments = () => {
             if (selectedFile.type === 'application/pdf') {
                 setIsValidType(true);
                 setFile(selectedFile);
+                setIsDisabled(false);
             } else {
                 setIsValidType(false);
             }
@@ -24,7 +27,7 @@ const UploadDocuments = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        setIsUploading(true);
         if (isValidType && file) {
             try {
                 const formData = new FormData();
@@ -33,7 +36,7 @@ const UploadDocuments = () => {
                 const response = await axios.post('http://localhost:3000/documents/uploadDocs', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
-                    },
+                    }, timeout: 60000,
                 });
 
                 // Handle success response
@@ -86,8 +89,8 @@ const UploadDocuments = () => {
                 </div>
                 <div>{!isValidType && <p>File type should be PDF</p>}</div>
 
-                <div className='upload-action'>
-                    <button className='upload-button' type='submit'>Upload</button>
+                <div className='upload-action' >
+                    <button className={`upload-button ${isDisabled || isUploading ? 'button-disabled' : ''}`} disabled={isDisabled || isUploading} type='submit'>{isUploading ? "Uploading" : "Upload"}</button>
                 </div>
             </form>
         </div>

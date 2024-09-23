@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectChatHistory } from '../../../store/Selectors/chatSelector';
 import { callConversationAPI } from '../../../services/conversation';
 import { setChatHistory } from '../../../store/Reducers/chatSlice';
+import { useParams } from 'react-router-dom';
 export interface ChatEntry {
     Human: string,
     AI: string,
@@ -26,25 +27,41 @@ const InputPrompt = () => {
         }
     }, [buttonDisabled]);
 
+    const { book_id } = useParams();
+
+    console.log(book_id);
+
+
     const handleInputValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setQuery(e.target.value);
         setButtonDisabled(e.target.value.trim().length == 0);
     }
 
     const handlePromptSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        // await hitAPI(query);
-        event.preventDefault();
-        dispatch(setChatHistory([...chatHistory, { "Human": query }]));
-        setQuery("");
-        const response = await callConversationAPI(query, chatHistory);
-        // const response = "sd";
-        console.log(response?.response);
-        const chatEntry = {
-            "Human": query,
-            "AI": response?.response,
-        };
-        dispatch(setChatHistory([...chatHistory, chatEntry]));
-        console.log([...chatHistory, chatEntry]);
+        try {
+            setButtonDisabled(true);
+            // await hitAPI(query);
+            event.preventDefault();
+            dispatch(setChatHistory([...chatHistory, { "Human": query }]));
+            const prompt = query;
+            setQuery("");
+            const response = await callConversationAPI(book_id, query);
+            setButtonDisabled(false);
+            // console.log(response?.response);
+            const chatEntry = {
+                "Human": query,
+                "AI": response?.data.answer,
+            };
+            dispatch(setChatHistory([...chatHistory, chatEntry]));
+            // console.log([...chatHistory, chatEntry]);
+        } catch (error) {
+            const chatEntry = {
+                "Human": query,
+                "AI": "I appreciate your inquiry, but I’m not in a position to respond to that specific question right now.",
+            };
+            dispatch(setChatHistory([...chatHistory, chatEntry]));
+        }
+
     }
 
 
