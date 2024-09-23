@@ -19,28 +19,6 @@ const AZURE_OPENAI_ENDPOINT = "https://foxaiproject.openai.azure.com/"
 const AZURE_DEPLOYMENT_ID = "text-embedding-ada-002"
 const URL = "https://foxaiproject.openai.azure.com/openai/deployments/text-embedding-ada-002/embeddings?api-version=2023-05-15"
 
-// async function generateEmbedding(text) {
-//     try {
-//         const response = await axios.post(
-//             embeddingUrl,
-//             { inputs: text },
-//             {
-//                 headers: {
-//                     Authorization: `Bearer ${hfToken}`,
-//                     'Content-Type': 'application/json',
-//                 },
-//             }
-//         );
-//         if (Array.isArray(response.data)) {
-//             return response.data;
-//         } else {
-//             throw new Error("Unexpected embedding response format");
-//         }
-//     } catch (error) {
-//         console.error(`Failed to generate embedding: ${error.message}`);
-//         throw error;
-//     }
-// }
 
 async function generateEmbedding(text) {
     try {

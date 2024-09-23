@@ -90,7 +90,9 @@ const UploadDocuments = () => {
                 <div>{!isValidType && <p>File type should be PDF</p>}</div>
 
                 <div className='upload-action' >
-                    <button className={`upload-button ${isDisabled || isUploading ? 'button-disabled' : ''}`} disabled={isDisabled || isUploading} type='submit'>{isUploading ? "Uploading" : "Upload"}</button>
+                    <button className={`upload-button ${isDisabled || isUploading ? 'button-disabled' : ''}`} disabled={isDisabled || isUploading} type='submit'>
+                        {isUploading ? "Uploading" : "Upload"}
+                    </button>
                 </div>
             </form>
         </div>

@@ -1,4 +1,8 @@
 .chat-link {
     text-decoration: none;
     cursor: pointer;
+    border: 1px solid #d1d1d1;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #f2f2f2;
 }

@@ -74,9 +74,12 @@ const ChatContainer = () => {
                                                 <div className='human-message'>{item["Human"]}</div>
                                             </div>
                                             {
-                                                item["AI"] == null ? <div className='chat-message chat-ai'>
-                                                    <div className='ai-avatar'><img src={bot} className='fox-icon' /></div>
-                                                    <div className='ai-response'></div></div> : <div className='chat-message chat-ai'>
+                                                item["AI"] == null ? (
+                                                    <div className='chat-message chat-ai'>
+                                                        <div className='ai-avatar'><img src={bot} className='fox-icon' /></div>
+                                                        <div className='ai-response'></div>
+                                                    </div>
+                                                ) : <div className='chat-message chat-ai'>
                                                     <div className='ai-avatar'><img src={bot} className='fox-icon' /></div>
                                                     <div className='ai-response'>
                                                         <div className='ai-message'>

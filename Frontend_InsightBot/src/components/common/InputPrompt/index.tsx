@@ -29,7 +29,6 @@ const InputPrompt = () => {
 
     const { book_id } = useParams();
 
-    console.log(book_id);
 
 
     const handleInputValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {

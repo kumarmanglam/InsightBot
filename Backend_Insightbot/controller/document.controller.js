@@ -79,7 +79,7 @@ const deleteFile = async (req, res) => {
         await Docs.findByIdAndDelete(documentId);
 
         // Delete associated embeddings from the Embeddings collection
-        const deletedEmbeddings = await Embedding.deleteMany({ source: `${docs_name}.pdf` });
+        const deletedEmbeddings = await Embedding.deleteMany({ pdf_id: new ObjectId(documentId) });
 
         res.send({
             message: 'File, document, and related embeddings deleted successfully.',
